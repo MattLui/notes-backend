@@ -8,7 +8,7 @@ if (process.argv.length<3) {
 const password = process.argv[2]
 
 const url =
-`mongodb+srv://mattclui:${password}@cluster0.ltfjcs7.mongodb.net/noteApp?retryWrites=true&w=majority`
+`mongodb+srv://mattclui:${password}@cluster0.ltfjcs7.mongodb.net/testNoteApp?retryWrites=true&w=majority`
 
 mongoose.set('strictQuery',false)
 mongoose.connect(url)
@@ -20,19 +20,20 @@ const noteSchema = new mongoose.Schema({
 
 const Note = mongoose.model('Note', noteSchema)
 
-// const note = new Note({
-//   content: 'Callback-functions suck',
-//   important: true,
-// })
+const note = new Note({
+  content: 'HTML is easy',
+  important: true,
+})
 
-// note.save().then(result => {
-//   console.log('note saved!')
-//   mongoose.connection.close()
-// })
-
-Note.find({}).then(result => {
-  result.forEach(note => {
-    console.log(note)
-  })
+// eslint-disable-next-line no-unused-vars
+note.save().then(result => {
+  console.log('note saved!')
   mongoose.connection.close()
 })
+
+// Note.find({}).then(result => {
+//   result.forEach(note => {
+//     console.log(note)
+//   })
+//   mongoose.connection.close()
+// })
